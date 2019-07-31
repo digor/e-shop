@@ -8,6 +8,7 @@ let app = new Vue ({
         imgCatalog: image,
         products: [],
         catalogUrl: `/catalogData.json`,
+        isVisibleCart: false,
         userSearch: '',
         filtered: []
     },
@@ -26,6 +27,9 @@ let app = new Vue ({
             let regExp = new RegExp(this.userSearch, 'i');
             this.filtered = this.products.filter(el => regExp.test (el.product_name));
         }
+    },
+    computed: {
+
     },
     mounted () {
         this.getJSON(`${API + this.catalogUrl}`)
