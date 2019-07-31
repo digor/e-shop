@@ -2,9 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>E-SHOP</title>
+    <link rel="stylesheet" href="style/normalize.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-$END$
+    <div id="app">
+        <header>
+            <div class="logo"><a href="index.html">E-shop</a></div>
+            <div class="cart">
+                <form action="#" class="search-form" @submit.prevent="filter">
+                    <input type="text" class="search-field" v-model="userSearch">
+                    <button class="btn-search" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <button class="btn-cart" type="button" @click="isVisibleCart = !isVisibleCart">Корзина</button>
+                <div class="cart-block" v-show="isVisibleCart"></div>
+            </div>
+        </header>
+        <main>
+            <div class="products">
+                <div class="product-item" v-for="product of filtered" :key="product.id_product">
+                    <img :src="imgCatalog" alt="product image">
+                    <div class="desc">
+                        <h3>{{product.product_name}}</h3>
+                        <p>{{product.price}} $</p>
+                        <button class="buy-btn" @click="addProduct (product)">Купить</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!--<script src="vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
