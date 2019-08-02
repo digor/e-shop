@@ -2,7 +2,7 @@ let product = {
     props: ['product', 'img'],
     template: `
                 <div class="product-item">
-                    <img :src="img" alt="Some img">
+                    <img :src="img" alt="Product image">
                     <div class="desc">
                         <h3> {{ product.product_name }} </h3>
                         <p>{{ product.price }} $</p>
