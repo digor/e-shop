@@ -9,12 +9,10 @@ let error = {
             this.text = error
         }
     },
-    template: `
-                <div class="error-block" v-if="text">
+    template: `<div class="error-block" v-if="text">
                     <p class="error-msg">
                         <button class="close-btn" @click="text=''">&times;</button>
                         {{ text }}
                     </p>
-                </div> 
-    `
+                </div>`
 }

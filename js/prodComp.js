@@ -36,7 +36,7 @@ let products = {
         product
     },
     mounted () {
-        this.$parent.getJSON(`${API + this.catalogUrl}`)
+        this.$parent.getJSON(`${API + this.ccatalogUrl}`)
             .then (data => {
                 for (let el of data) {
                     this.products.push (el)

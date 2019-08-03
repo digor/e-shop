@@ -12,7 +12,7 @@ let app = new Vue ({
             return fetch (url)
                 .then (result => result.json ())
                 .catch (error => {
-                    this.$refs,err.setError(error);
+                    this.$root.$refs.err.setError(error);
                     console.log (error);
                 });
         },
@@ -29,7 +29,7 @@ let app = new Vue ({
     components: {
         products,
         cart,
-        //error
+        error
     }
 })
 

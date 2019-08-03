@@ -172,3 +172,23 @@ img {
     border: none;
     border-bottom: 2px solid #fafafa;
 }
+.error-block {
+    margin: 10px auto;
+    height: 50px;
+    width: 70%;
+    border: 3px solid red;
+    background-color: #f2b8cf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 20px;
+}
+.error-msg {
+    color: #FF0000;
+}
+.close-btn {
+    border: 0px;
+    background: #FF0000;
+    font-size: 20px;
+    color: #FFF;
+}
