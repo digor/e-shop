@@ -5,40 +5,31 @@ const API = 'https://raw.githubusercontent.com/digor/GB-Online-Store/master/resp
 let app = new Vue ({
     el: '#app',
     data: {
-        imgCatalog: image,
-        products: [],
-        catalogUrl: `/catalogData.json`,
-        isVisibleCart: false,
-        userSearch: '',
-        filtered: []
+        userSearch: ''
     },
     methods: {
         getJSON (url) {
             return fetch (url)
                 .then (result => result.json ())
                 .catch (error => {
-                    console.log (error)
+                    this.$refs,err.setError(error);
+                    console.log (error);
                 });
-        },
-        addProduct (product) {
-            console.log (product.id_product);
         },
         filter () {
             let regExp = new RegExp(this.userSearch, 'i');
-            this.filtered = this.products.filter(el => regExp.test (el.product_name));
+            this.filtered = this.products.filter (el => regExp.test (el.product_name));
         }
     },
     computed: {
 
     },
     mounted () {
-        this.getJSON(`${API + this.catalogUrl}`)
-            .then (data => {
-                for (let el of data) {
-                    this.products.push (el);
-                    this.filtered.push (el);
-                }
-            })
+    },
+    components: {
+        products,
+        cart,
+        //error
     }
 })
 

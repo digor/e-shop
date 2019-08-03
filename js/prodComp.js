@@ -6,8 +6,7 @@ let product = {
                     <div class="desc">
                         <h3> {{ product.product_name }} </h3>
                         <p>{{ product.price }} $</p>
-                        <!--button class="buy-btn" @click="$root.$refs.cart.addProduct (product)">Купить</button-->
-                        <button class="buy-btn" @click="$parent.addProduct (product)">Купить</button>
+                        <button class="buy-btn" @click="$root.$refs.cart.addProduct (product)">Купить</button>
                     </div>
             </div>
     `
@@ -24,25 +23,20 @@ let products = {
         }
     },
     methods: {
-        addProduct (product) {
-            console.log (product.id_product)
-        }
     },
-    template: `
-        <div class="products">
-              <product
-              v-for="product of filtered"
-              :key="product.id_product"
-              :img="imgCatalog"
-              :product="product"
-              ></product>  
-        </div>
-    `,
+    template: `<div class="products">
+                      <product
+                      v-for="product of filtered"
+                      :key="product.id_product"
+                      :img="imgCatalog"
+                      :product="product"
+                      ></product>  
+                </div>`,
     components: {
         product
     },
     mounted () {
-        this.$parent.getJSON(`${API_URL + this.catalogUrl}`)
+        this.$parent.getJSON(`${API + this.catalogUrl}`)
             .then (data => {
                 for (let el of data) {
                     this.products.push (el)

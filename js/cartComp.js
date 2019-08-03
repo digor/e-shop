@@ -10,8 +10,8 @@ let cartItem = {
   						</div>
   					</div>
   					<div class="right-block">
-  						<p class="product-price"> {{ cartItem.quantity * cartItem.price }}</p>
-  						<button class="del-btn" :data-id=" cartItem.id_product">&times;</button>
+  						<p class="product-price">{{ cartItem.quantity * cartItem.price }}</p>
+  						<button @click="$parent.removeProduct (cartItem)" class="del-btn" :data-id="cartItem.id_product">&times;</button>
   					</div>
   				</div>`
 }
@@ -20,24 +20,59 @@ let cart = {
     props: [],
     data () {
         return {
-
+            cartItems: [],
+            imgCart: 'https://placehold.it/100x80',
+            cartUrl: '/getBasket.json',
+            showCart: false
         }
     },
     methods: {
+        addProduct (product) {
+            this.$parent.getJSON (`${API}/addToBasket.json`)
+                .then (data => {
+                    if (data.result) {
+                        let find = this.cartItems.find(el => el.id_product === product.id_product);
 
+                        if (find) {
+                            find.quantity++;
+                        } else {
+                            let prod = Object.assign ({quantity: 1, product});
+                            this.cartItems.push (prod);
+                        }
+                    }
+                })
+        },
+        removeProduct (product) {
+            this.$parent.getJSON (`${API}/deleteFromBasket.json`)
+                .then (data => {
+                    if (data.result) {
+                        if (product.quantity > 1) {
+                            product.quantity--;
+                        } else {
+                            this.cartItems.splice (this.cartItems.indexOf(product), 1);
+                        }
+                    }
+                })
+        }
     },
-    template: `
-        
-    `,
+    template: `<div>
+                    <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
+                    <div class="cart-block" v-show="showCart">
+                        <cart-item 
+                        v-for="product of cartItems"
+                        :key="product.id_product"
+                        :img="imgCart"
+                        :cartItem="product"></cart-item>
+</div>
+                </div>`,
     components: {
         'cart-item': cartItem
     },
     mounted () {
-        this.$parent.getJSON(`${API_URL + this.catalogUrl}`)
+        this.$parent.getJSON(`${API + this.cartUrl}`)
             .then (data => {
-                for (let el of data) {
-                    this.products.push (el)
-                    this.filtered.push (el)
+                for (let el of data.contents) {
+                    this.cartItems.push (el);
                 }
             })
     }
