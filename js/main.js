@@ -16,10 +16,10 @@ let app = new Vue ({
                     console.log (error);
                 });
         },
-        filter () {
-            let regExp = new RegExp(this.userSearch, 'i');
-            this.filtered = this.products.filter (el => regExp.test (el.product_name));
-        }
+        // filter () {
+        //     let regExp = new RegExp(this.userSearch, 'i');
+        //     this.filtered = this.products.filter(el => regExp.test (el.product_name));
+        // }
     },
     computed: {
 
@@ -27,9 +27,7 @@ let app = new Vue ({
     mounted () {
     },
     components: {
-        products,
-        cart,
-        error
+        products, cart, error
     }
 })
 

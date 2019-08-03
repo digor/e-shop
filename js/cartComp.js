@@ -11,7 +11,9 @@ let cartItem = {
   					</div>
   					<div class="right-block">
   						<p class="product-price">{{ cartItem.quantity * cartItem.price }}</p>
-  						<button @click="$parent.removeProduct (cartItem)" class="del-btn" :data-id="cartItem.id_product">&times;</button>
+  						<button @click="$parent.removeProduct (cartItem)" 
+  						class="del-btn" 
+  						:data-id="cartItem.id_product">&times;</button>
   					</div>
   				</div>`
 }
@@ -22,7 +24,7 @@ let cart = {
         return {
             cartItems: [],
             imgCart: 'https://placehold.it/100x80',
-            cartUrl: '/getBasket.json',
+            cartUrl: `/getBasket.json`,
             showCart: false
         }
     },
@@ -31,13 +33,17 @@ let cart = {
             this.$parent.getJSON (`${API}/addToBasket.json`)
                 .then (data => {
                     if (data.result) {
-                        let find = this.cartItems.find(el => el.id_product === product.id_product);
 
+                        //console.log(product);
+                        let find = this.cartItems.find (el => el.id_product === product.id_product);
                         if (find) {
                             find.quantity++;
+                            console.log(`find`);
                         } else {
                             let prod = Object.assign ({quantity: 1, product});
-                            this.cartItems.push (prod);
+                            this.cartItems.push (product);
+                            console.log(`add new prod`);
+                            console.log(product);
                         }
                     }
                 })
@@ -58,12 +64,13 @@ let cart = {
     template: `<div>
                     <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
                     <div class="cart-block" v-show="showCart">
-                        <cart-item 
+                        <cart-item
                         v-for="product of cartItems"
                         :key="product.id_product"
                         :img="imgCart"
-                        :cartItem="product"></cart-item>
-</div>
+                        :cartItem="product"
+                        ></cart-item>
+                        </div>
                 </div>`,
     components: {
         'cart-item': cartItem
@@ -72,6 +79,7 @@ let cart = {
         this.$parent.getJSON(`${API + this.cartUrl}`)
             .then (data => {
                 for (let el of data.contents) {
+                    console.log(el)
                     this.cartItems.push (el);
                 }
             })
