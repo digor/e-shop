@@ -11,12 +11,7 @@
         <header>
             <div class="logo"><a href="index.html">E-shop</a></div>
             <div class="cart">
-                <form action="#" class="search-form" @submit.prevent="filter">
-                    <input type="text" class="search-field" v-model="userSearch">
-                    <button class="btn-search" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
+                <filter-el ref="filterEl"></filter-el>
                 <cart ref="cart"></cart>
             </div>
         </header>

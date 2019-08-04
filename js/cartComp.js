@@ -79,7 +79,6 @@ let cart = {
         this.$parent.getJSON(`${API + this.cartUrl}`)
             .then (data => {
                 for (let el of data.contents) {
-                    console.log(el)
                     this.cartItems.push (el);
                 }
             })

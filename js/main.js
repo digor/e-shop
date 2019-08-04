@@ -5,7 +5,7 @@ const API = 'https://raw.githubusercontent.com/digor/GB-Online-Store/master/resp
 let app = new Vue ({
     el: '#app',
     data: {
-        userSearch: ''
+        //userSearch: ''
     },
     methods: {
         getJSON (url) {
@@ -21,13 +21,8 @@ let app = new Vue ({
         //     this.filtered = this.products.filter(el => regExp.test (el.product_name));
         // }
     },
-    computed: {
-
-    },
-    mounted () {
-    },
     components: {
-        products, cart, error
+        products, cart, error, filterEl
     }
 })
 
