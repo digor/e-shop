@@ -2,9 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>E-SHOP</title>
+    <link rel="stylesheet" href="style/normalize.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
-$END$
+    <div id="app">
+        <header>
+            <div class="logo"><a href="index.html">E-shop</a></div>
+            <div class="cart">
+                <form action="#" class="search-form" @submit.prevent="filter">
+                    <input type="text" class="search-field" v-model="userSearch">
+                    <button class="btn-search" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                <cart ref="cart"></cart>
+            </div>
+        </header>
+        <main>
+            <products ref="products"></products>
+        </main>
+        <error ref="err"></error>
+    </div>
+
+    <!--<script src="vue.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    <script src="js/errorComp.js"></script>
+    <script src="js/filterComp.js"></script>
+    <script src="js/cartComp.js"></script>
+    <script src="js/prodComp.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
